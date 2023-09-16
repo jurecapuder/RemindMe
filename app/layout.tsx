@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { ClerkProvider } from '@clerk/nextjs'
+import { Separator } from '@/components/ui/separator'
+import NavBar from '@/components/ui/NavBar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +21,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <div className='flex min-h-screen w-full flex-col items-center dark:bg-black'>
+            <NavBar />
+            <Separator />
+            {children}
+          </div>
+        </body>
       </html>
     </ClerkProvider>
   )
