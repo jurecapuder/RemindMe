@@ -3,6 +3,7 @@
 import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from './tabs';
+import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -15,10 +16,18 @@ const ThemeSwitcher = () => {
 
   return (
     <Tabs defaultValue={theme}>
-      <TabsList>
-        <TabsTrigger value="light"></TabsTrigger>
-        <TabsTrigger value="dark"></TabsTrigger>
-        <TabsTrigger value="system"></TabsTrigger>
+      <TabsList className='border dark:border-neutral-800 dark:bg-[#030303]'>
+        <TabsTrigger value="light">
+          <SunIcon />
+        </TabsTrigger>
+
+        <TabsTrigger value="dark">
+          <MoonIcon />
+        </TabsTrigger>
+
+        <TabsTrigger value="system">
+          <DesktopIcon />
+        </TabsTrigger>
       </TabsList>
     </Tabs>
   )
