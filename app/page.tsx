@@ -1,7 +1,16 @@
-import { UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs"
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
+
+  if (!user) {
+    return <div>Error</div>
+  }
+
   return (
-    <div>Hello</div>
+    <div>
+      Welcome, <br/> {user.firstName} {user.lastName}
+
+    </div>
   )
 }
