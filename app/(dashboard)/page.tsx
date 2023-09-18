@@ -1,5 +1,6 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
-import { wait } from "@/lib/wait";
+import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs"
 import { Suspense } from "react";
 
@@ -15,7 +16,6 @@ export default async function Home() {
 
 async function WelcomeMsg() {
   const user = await currentUser();
-  await wait(3000)
 
   if (!user) {
     return <div>Error</div>
@@ -39,4 +39,22 @@ function WelcomeMsgFallback() {
       </h1>
     </div>
   )
+}
+
+async function CollectionList() {
+  const user = await currentUser();
+  const collections = await prisma.collection.findMany({
+    where: {
+      userId: user?.id,
+    },
+  })
+
+  if (collections.length === 0) {
+    return (
+      <Alert>
+        <AlertTitle>There are no collections yet!</AlertTitle>
+        <AlertDescription>Create a collection to get started</AlertDescription>
+      </Alert>
+    )
+  }
 }
