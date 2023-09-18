@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 
 import { ClerkProvider } from '@clerk/nextjs';
 import { Separator } from '@/components/ui/separator';
-import NavBar from '@/components/ui/NavBar';
+import NavBar from '@/components/NavBar';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
 
