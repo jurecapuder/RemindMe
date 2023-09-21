@@ -6,6 +6,9 @@ import {
   SheetHeader,
   SheetTitle
 } from './ui/sheet';
+import { useForm } from 'react-hook-form';
+import { createCollectionSchema, createCollectionSchemaType } from '@/schema/createCollection';
+import { zodResolver } from '@hookform/resolvers/zod'; 
 
 interface Props {
   open: boolean;
@@ -13,6 +16,11 @@ interface Props {
 }
 
 function CreateCollectionSheet({ open, onOpenChange }: Props) {
+  const form = useForm<createCollectionSchemaType>({
+    resolver: zodResolver(createCollectionSchema),
+    defaultValues: {},
+  })
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent>
@@ -22,7 +30,7 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
           </SheetTitle>
 
           <SheetDescription>
-            Collections are a away to group your tasks.
+            Collections are a way to group your tasks.
           </SheetDescription>
         </SheetHeader>
       </SheetContent>
