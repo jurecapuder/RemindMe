@@ -11,7 +11,9 @@ import { createCollectionSchema, createCollectionSchemaType } from '@/schema/cre
 import { zodResolver } from '@hookform/resolvers/zod'; 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { Input } from './ui/input';
-import { Select, SelectTrigger, SelectValue } from './ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { CollectionColor, CollectionColors } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 interface Props {
   open: boolean;
@@ -76,10 +78,24 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
                         className="w-full h-8"
                       />
                     </SelectTrigger>
+                    <SelectContent className='w-full'>
+                      {Object.keys(CollectionColors).map((color) => (
+                        <SelectItem
+                          key={color}
+                          value={color}
+                          className={cn(`w-full h-8 rounded-md my-1 text-white focus:text-white focus:font-bold focus:ring-2 ring-neutral-600 focus:ring-inset dark:focus:ring-white focus:px-8`,
+                            CollectionColors[color as CollectionColor]
+                          )}>
+                          {color}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                   </Select>
                 </FormControl>
 
-                <FormDescription>Select a color for your collection</FormDescription>
+                <FormDescription>
+                  Select a color for your collection
+                </FormDescription>
 
                 <FormMessage />
               </FormItem>
