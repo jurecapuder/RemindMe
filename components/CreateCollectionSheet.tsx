@@ -14,6 +14,8 @@ import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { Separator } from './ui/separator';
+import { Button } from './ui/button';
 
 interface Props {
   open: boolean;
@@ -108,6 +110,11 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
           />
         </form>
       </Form>
+
+      <div className='flex flex-col gap-3 mt-4'>
+        <Separator />
+        <Button>Confirm</Button>
+      </div>
       </SheetContent>
     </Sheet>
   )
