@@ -1,3 +1,4 @@
+"use server"
 import prisma from "@/lib/prisma";
 import { createCollectionSchemaType } from "@/schema/createCollection";
 import { currentUser } from "@clerk/nextjs";
