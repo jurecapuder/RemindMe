@@ -16,6 +16,7 @@ import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Separator } from './ui/separator';
 import { Button } from './ui/button';
+import { createCollection } from '@/actions/collection';
 
 interface Props {
   open: boolean;
@@ -28,8 +29,14 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
     defaultValues: {},
   })
 
-  const onSubmit = (data: createCollectionSchemaType) => {
-    console.log("SUBMITTED", data)
+  const onSubmit = async(data: createCollectionSchemaType) => {
+    try {
+      await createCollection(data);
+    } catch (e: any) {
+      // show toast
+      alert("ERROR")
+      console.log("Error while creating collection", e)
+    }
   }
 
   const openChangeWrapper = (open: boolean) => {
