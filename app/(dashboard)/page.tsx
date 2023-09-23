@@ -59,11 +59,24 @@ async function CollectionList() {
       <div className="flex flex-col gap-5 mt-4">
         <Alert>
           <SadFace />
-          <AlertTitle>There are no collections yet!</AlertTitle>
-          <AlertDescription>Create a collection to get started</AlertDescription>
+
+          <AlertTitle>
+            There are no collections yet!
+          </AlertTitle>
+
+          <AlertDescription>
+            Create a collection to get started
+          </AlertDescription>
         </Alert>
         <CreateCollectionBtn />
       </div>
     )
   }
+
+  return (
+    <div>
+      Collections: {collections.length}
+      <CreateCollectionBtn />
+    </div>
+  )
 }
