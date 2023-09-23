@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { Separator } from './ui/separator';
 import { Button } from './ui/button';
 import { createCollection } from '@/actions/collection';
+import { toast } from './ui/use-toast';
 
 interface Props {
   open: boolean;
@@ -32,9 +33,21 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
   const onSubmit = async(data: createCollectionSchemaType) => {
     try {
       await createCollection(data);
+
+      // Close the sheet
+      openChangeWrapper(false);
+      
+      toast({
+        title: "Success",
+        description: "Collection created successfully!",
+      })
     } catch (e: any) {
       // show toast
-      alert("ERROR")
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive"
+      })
       console.log("Error while creating collection", e)
     }
   }
