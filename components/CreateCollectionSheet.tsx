@@ -18,6 +18,7 @@ import { Separator } from './ui/separator';
 import { Button } from './ui/button';
 import { createCollection } from '@/actions/collection';
 import { toast } from './ui/use-toast';
+import { ReloadIcon } from '@radix-ui/react-icons';
 
 interface Props {
   open: boolean;
@@ -36,7 +37,7 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
 
       // Close the sheet
       openChangeWrapper(false);
-      
+
       toast({
         title: "Success",
         description: "Collection created successfully!",
@@ -139,6 +140,7 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
       <div className='flex flex-col gap-3 mt-4'>
         <Separator />
         <Button
+          disabled={form.formState.isSubmitting}
           variant={"outline"}
           className={cn(
             form.watch("color") && CollectionColors[form.getValues("color") as CollectionColor]
@@ -146,6 +148,10 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
           onClick={form.handleSubmit(onSubmit)}
         >
           Confirm
+
+          {form.formState.isSubmitting && (
+            <ReloadIcon className='ml-2 h-4 w-4 animate-spin' />
+          )}
         </Button>
       </div>
       </SheetContent>
