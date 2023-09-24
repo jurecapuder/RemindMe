@@ -9,6 +9,7 @@ import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
 import { Progress } from './ui/progress';
 import { Separator } from './ui/separator';
+import PlusIcon from './icons/PlusIcon';
 
 interface Props {
   collection: Collection;
@@ -63,6 +64,12 @@ function CollectionCard({ collection }: Props) {
           <p>
             Created at {collection.createdAt.toDateString()}
           </p>
+
+          <div>
+            <Button size={"icon"} variant={"ghost"}>
+              <PlusIcon />
+            </Button>
+          </div>
         </footer>
       </CollapsibleContent>
     </Collapsible>
