@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
 import { Progress } from './ui/progress';
+import { Separator } from './ui/separator';
 
 interface Props {
   collection: Collection;
@@ -24,6 +25,7 @@ function CollectionCard({ collection }: Props) {
         <Button
           variant={"ghost"}
           className={cn("flex w-full justify-between p-6",
+          isOpen && "rounded-b-none",
           CollectionColors[collection.color as CollectionColor]
           )}
         >
@@ -44,9 +46,9 @@ function CollectionCard({ collection }: Props) {
         {
           tasks.length > 0 && (
             <>
-              <Progress />
+              <Progress className='rounded-none' value={45} />
 
-              <div>
+              <div className="p-4 gap-3 flex flex-col">
                 {tasks.map((task) => (
                   <div>Mocked task</div>
                 ))}
@@ -54,6 +56,12 @@ function CollectionCard({ collection }: Props) {
             </>
           )
         }
+
+        <Separator />
+
+        <footer className='h-[40px] px-4 p-[2px] text-xs text-neutral-500 flex justify-between items-center'>
+          Footer
+        </footer>
       </CollapsibleContent>
     </Collapsible>
   )
