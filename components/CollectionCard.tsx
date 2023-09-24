@@ -6,7 +6,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collap
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
-import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon, CaretUpIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Progress } from './ui/progress';
 import { Separator } from './ui/separator';
 import PlusIcon from './icons/PlusIcon';
@@ -68,6 +68,10 @@ function CollectionCard({ collection }: Props) {
           <div>
             <Button size={"icon"} variant={"ghost"}>
               <PlusIcon />
+            </Button>
+
+            <Button size={"icon"} variant={"ghost"}>
+              <TrashIcon />
             </Button>
           </div>
         </footer>
