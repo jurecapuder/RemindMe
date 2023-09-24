@@ -19,6 +19,7 @@ import { Button } from './ui/button';
 import { createCollection } from '@/actions/collection';
 import { toast } from './ui/use-toast';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   open: boolean;
@@ -31,12 +32,15 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
     defaultValues: {},
   })
 
+  const router = useRouter();
+
   const onSubmit = async(data: createCollectionSchemaType) => {
     try {
       await createCollection(data);
 
       // Close the sheet
       openChangeWrapper(false);
+      router.refresh();
 
       toast({
         title: "Success",
@@ -148,7 +152,6 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
           onClick={form.handleSubmit(onSubmit)}
         >
           Confirm
-
           {form.formState.isSubmitting && (
             <ReloadIcon className='ml-2 h-4 w-4 animate-spin' />
           )}
