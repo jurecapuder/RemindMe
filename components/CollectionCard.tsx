@@ -11,6 +11,8 @@ import { Progress } from './ui/progress';
 import { Separator } from './ui/separator';
 import PlusIcon from './icons/PlusIcon';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
+import { deleteCollection } from '@/actions/collection';
+import { toast } from './ui/use-toast';
 
 interface Props {
   collection: Collection;
@@ -20,6 +22,22 @@ const tasks: string[] = ["Task 1", "Task 2"];
 
 function CollectionCard({ collection }: Props) {
   const [isOpen, setIsOpen] = useState(true);
+
+  const removeCollection = async () => {
+    try {
+      await deleteCollection(collection.id)
+      toast({
+        title: "Success",
+        description: "Collection deleted successfully",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Cannot delete collection",
+        variant: "destructive"
+      })
+    }
+  }
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
