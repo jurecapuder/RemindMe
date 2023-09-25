@@ -1,6 +1,6 @@
 "use client";
 
-import { Collection } from '@prisma/client';
+import { Collection, Task } from '@prisma/client';
 import React, { useState, useTransition } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { Button } from './ui/button';
@@ -16,15 +16,17 @@ import { toast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
 
 interface Props {
-  collection: Collection;
+  collection: Collection & {
+    tasks: Task[];
+  };
 }
-
-const tasks: string[] = ["Task 1", "Task 2"];
 
 function CollectionCard({ collection }: Props) {
   const [isOpen, setIsOpen] = useState(true);
 
   const router = useRouter();
+
+  const tasks = collection.tasks;
 
   const [isLoading, startTransition] = useTransition();
 
