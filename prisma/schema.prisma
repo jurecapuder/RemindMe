@@ -17,7 +17,7 @@ model Collection {
   color     String
   createdAt DateTime  @default(now())
 
-  tasks Task[]
+  tasks     Task[]
 
   @@unique([name, userId])
 }
