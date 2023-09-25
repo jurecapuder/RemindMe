@@ -1,7 +1,7 @@
 "use client";
 
 import { Collection } from '@prisma/client';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
@@ -13,6 +13,7 @@ import PlusIcon from './icons/PlusIcon';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog';
 import { deleteCollection } from '@/actions/collection';
 import { toast } from './ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   collection: Collection;
@@ -23,6 +24,10 @@ const tasks: string[] = ["Task 1", "Task 2"];
 function CollectionCard({ collection }: Props) {
   const [isOpen, setIsOpen] = useState(true);
 
+  const router = useRouter();
+
+  const [isLoading, startTransition] = useTransition();
+
   const removeCollection = async () => {
     try {
       await deleteCollection(collection.id)
@@ -30,6 +35,7 @@ function CollectionCard({ collection }: Props) {
         title: "Success",
         description: "Collection deleted successfully",
       })
+      router.refresh();
     } catch (error) {
       toast({
         title: "Error",
@@ -110,7 +116,9 @@ function CollectionCard({ collection }: Props) {
                     Cancel
                   </AlertDialogCancel>
 
-                  <AlertDialogAction>
+                  <AlertDialogAction onClick={() => {
+                    removeCollection();
+                  }}>
                     Proceed
                   </AlertDialogAction>
                 </AlertDialogFooter>
