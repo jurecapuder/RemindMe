@@ -78,7 +78,9 @@ function CollectionCard({ collection }: Props) {
 
               <div className="p-4 gap-3 flex flex-col">
                 {tasks.map((task) => (
-                  <div>Mocked task</div>
+                  <div key={task.id}>
+                    {task.content}
+                  </div>
                 ))}
               </div>
             </>
