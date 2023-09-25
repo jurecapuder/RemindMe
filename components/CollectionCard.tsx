@@ -14,6 +14,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { deleteCollection } from '@/actions/collection';
 import { toast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
+import CreateTaskDialog from './CreateTaskDialog';
 
 interface Props {
   collection: Collection & {
@@ -51,6 +52,12 @@ function CollectionCard({ collection }: Props) {
 
   return (
     <>
+      <CreateTaskDialog
+        open={showCreateModal}
+        setOpen={setShowCreateModal}
+        collection={collection}
+      />
+
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
           <Button
