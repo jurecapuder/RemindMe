@@ -90,41 +90,45 @@ function CollectionCard({ collection }: Props) {
             Created at {collection.createdAt.toDateString()}
           </p>
 
-          <div>
-            <Button size={"icon"} variant={"ghost"}>
-              <PlusIcon />
-            </Button>
+          {isLoading && <div>Deleting...</div>}
 
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button size={"icon"} variant={"ghost"}>
-                  <TrashIcon />
-                </Button>
-              </AlertDialogTrigger>
+          {!isLoading && (
+            <div>
+              <Button size={"icon"} variant={"ghost"}>
+                <PlusIcon />
+              </Button>
 
-              <AlertDialogContent>
-                <AlertDialogTitle>
-                  Are you absolutely sure?
-                </AlertDialogTitle>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button size={"icon"} variant={"ghost"}>
+                    <TrashIcon />
+                  </Button>
+                </AlertDialogTrigger>
 
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete the <span className='font-bold'>{collection.name}</span> collection and all tasks inside it.
-                </AlertDialogDescription>
+                <AlertDialogContent>
+                  <AlertDialogTitle>
+                    Are you absolutely sure?
+                  </AlertDialogTitle>
 
-                <AlertDialogFooter>
-                  <AlertDialogCancel>
-                    Cancel
-                  </AlertDialogCancel>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete the <span className='font-bold'>{collection.name}</span> collection and all tasks inside it.
+                  </AlertDialogDescription>
 
-                  <AlertDialogAction onClick={() => {
-                    removeCollection();
-                  }}>
-                    Proceed
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>
+                      Cancel
+                    </AlertDialogCancel>
+
+                    <AlertDialogAction onClick={() => {
+                      startTransition(removeCollection);
+                    }}>
+                      Proceed
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
+          )}
         </footer>
       </CollapsibleContent>
     </Collapsible>
