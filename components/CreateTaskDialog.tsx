@@ -14,7 +14,7 @@ import { Textarea } from './ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar } from './ui/calendar';
 import { Button } from './ui/button';
-import { CalendarIcon } from '@radix-ui/react-icons';
+import { CalendarIcon, ReloadIcon } from '@radix-ui/react-icons';
 import { format } from 'date-fns';
 
 interface Props {
@@ -136,12 +136,19 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
         </div>
 
         <DialogFooter>
-          <Button className={cn(
-            "w-full dark:text-white text-white",
-            CollectionColors[collection.color as CollectionColor]
+          <Button
+            disabled={!form.formState.isSubmitting}
+            className={cn(
+              "w-full dark:text-white text-white",
+              CollectionColors[collection.color as CollectionColor]
             )}
+            onClick={form.handleSubmit(onSubmit)}
           >
             Confirm
+
+            {form.formState.isSubmitting && (
+              <ReloadIcon className='ml-2 h-4 w-4 animate-spin' />
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>
