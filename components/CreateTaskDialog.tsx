@@ -2,7 +2,7 @@
 
 import { Collection } from '@prisma/client';
 import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { cn } from '@/lib/utils';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
 
@@ -19,10 +19,10 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={openChangeWrapper}>
-      <DialogContent>
+      <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>
-            Add task to collection: {" "}
+          <DialogTitle className='flex gap-2'>
+            Add task to collection:
 
             <span className={cn(
               "p-[1px] bg-clip-text text-transparent",
@@ -32,6 +32,10 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
               {collection.name}
             </span>
           </DialogTitle>
+
+          <DialogDescription>
+            Add a task to your collection. You can add as many tasks as you want to a collection.
+          </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
