@@ -2,7 +2,7 @@
 
 import { Collection } from '@prisma/client';
 import React from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog';
 import { cn } from '@/lib/utils';
 import { CollectionColor, CollectionColors } from '@/lib/constants';
 import { useForm } from 'react-hook-form';
@@ -134,6 +134,16 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
             </form>
           </Form>
         </div>
+
+        <DialogFooter>
+          <Button className={cn(
+            "w-full dark:text-white text-white",
+            CollectionColors[collection.color as CollectionColor]
+            )}
+          >
+            Confirm
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
