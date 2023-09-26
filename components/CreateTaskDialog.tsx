@@ -60,7 +60,7 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
           </DialogDescription>
         </DialogHeader>
 
-        <div>
+        <div className='gap-4 py-4'>
           <Form {...form}>
             <form
               className='space-y-4 flex flex-col'
