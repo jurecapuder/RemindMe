@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar } from './ui/calendar';
 import { Button } from './ui/button';
 import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
 
 interface Props {
   open: boolean;
@@ -103,8 +104,15 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
                     <FormControl>
                       <Popover>
                         <PopoverTrigger asChild>
-                          <Button>
+                          <Button variant={"outline"} className={cn(
+                            "justfity-start text-left font-normal w-full",
+                            !field.value && "text-muted-foreground"
+                          )}>
                             <CalendarIcon className='mr-2 h-4 w-4' />
+
+                            {field.value && format(field.value, "PPP")}
+
+                            {!field.value && <span>No expiration</span>}
                           </Button>
                         </PopoverTrigger>
 
