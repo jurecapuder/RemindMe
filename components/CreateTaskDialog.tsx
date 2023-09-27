@@ -112,7 +112,7 @@ function CreateTaskDialog({ open, setOpen, collection }: Props) {
 
                             {field.value && format(field.value, "PPP")}
 
-                            {!field.value && <span>No expiration</span>}
+                            {!field.value && <span> No expiration </span>}
                           </Button>
                         </PopoverTrigger>
 
