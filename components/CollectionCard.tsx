@@ -79,7 +79,20 @@ function CollectionCard({ collection }: Props) {
         </CollapsibleTrigger>
 
         <CollapsibleContent className='flex rounded-b-md flex-col dark:bg-neutral-900 shadow-lg'>
-          {tasks.length === 0 && <div>No tasks</div>}
+          {tasks.length === 0 && (
+            <Button
+              variant={"ghost"}
+              className='flex items-center justify-center gap-1 p-8 py-12 rounded-none'
+              onClick={() => setShowCreateModal(true)}
+            >
+              <p>There are no tasks yet: </p>
+
+              <span className={cn(
+                "text-sm bg-clip-text text-transparent",
+                CollectionColors[collection.color as CollectionColor]
+              )}>Create one </span>
+            </Button>
+          )}
 
           {
             tasks.length > 0 && (
@@ -101,7 +114,7 @@ function CollectionCard({ collection }: Props) {
 
           <footer className='h-[40px] px-4 p-[2px] text-xs text-neutral-500 flex justify-between items-center'>
             <p>
-              Created at {collection.createdAt.toDateString()}
+              Created at {collection.createdAt.toLocaleDateString()}
             </p>
 
             {isLoading && <div>Deleting...</div>}
@@ -129,7 +142,9 @@ function CollectionCard({ collection }: Props) {
                     </AlertDialogTitle>
 
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete the <span className='font-bold'>{collection.name}</span> collection and all tasks inside it.
+                      This action cannot be undone. This will permanently delete the
+                      <span className='font-bold'> {collection.name} </span>
+                      collection and all tasks inside it.
                     </AlertDialogDescription>
 
                     <AlertDialogFooter>
