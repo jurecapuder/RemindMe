@@ -89,7 +89,7 @@ function CreateTaskDialog({ open, collection, setOpen }: Props) {
               {collection.name}
             </span>
           </DialogTitle>
-          
+
           <DialogDescription>
             Add a task to your collection. You can add as many tasks as you want to a collection.
           </DialogDescription>
