@@ -27,7 +27,7 @@ model Task {
   content String
   userId String
   done Boolean @default(false)
-  expiredAt DateTime?
+  expiresAt DateTime?
   createdAt DateTime @default(now())
 
   collectionId Int
