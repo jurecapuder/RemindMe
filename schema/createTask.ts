@@ -5,7 +5,7 @@ export const createTaskSchema = z.object({
   content: z.string().min(8, {
     message: "Task content must be at least 8 characters"
   }),
-  expiresAt: z.string().optional()
+  expiresAt: z.date().optional()
 })
 
 export type createTaskSchemaType = z.infer<typeof createTaskSchema>
